@@ -1,7 +1,8 @@
-/* eslint-disable jsx-a11y/alt-text */
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Main from "@/Components/Main";
+import ButtonsHome from "@/Components/ButtonsHome";
+
 
 export default function Home() {
   return (
@@ -14,9 +15,14 @@ export default function Home() {
       </Head>
       <Main/>
       <div className={styles.container}>
-        <h2>Findy ajudando voce a<br/> enccontra algo que ama.</h2>
+        <h1 >Findy ajudando você a<br/> enccontra algo que ama.</h1>
         <p>“São Longuinho, São Longuinho, se eu achar...”<br/> Vamos lá!</p>
+        <div className={styles.buttonHome}>
+          <ButtonsHome />
+        </div>
+       
       </div>
+      
     </>
   );
 }

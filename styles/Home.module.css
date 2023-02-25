@@ -4,21 +4,27 @@
   align-items: center;
   justify-content: center;
   margin-left: 22em;
-  
+  height: auto;
+  width: auto;
   font-family: Poppins, sans-serif;
   color: black;
 }
-.container h2{
+.container h1{
   line-height: 1.15;
-  font-size: 2.3rem;
-  margin-top: -20em;
+  font-size: 3.2rem;
+  margin-top: -12em;
   font-weight: bold;
 }
 .container p{
-  margin-left: -8.5em;
-  font-size: .9rem;
+  margin-left: -15.9em;
+  font-size: 1rem;
   margin-top: 1em;
   color: #1C1C1C;
+}
+
+.buttonHome{
+  margin-top: 5em;
+  margin-left: -19.9em;
 }
 
 

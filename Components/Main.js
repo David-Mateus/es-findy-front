@@ -24,12 +24,6 @@ export default function Main() {
         alt="Ilustração"
         className={styles.imgIustration}
         />
-        <Image
-        src="/image/circle.png"
-        width="180"
-        height="180"
-        alt="circle"
-        />
       </div>
     </>
   );
