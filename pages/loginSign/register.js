@@ -1,104 +1,129 @@
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import styles from "@/styles/Forms.module.css";
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
 
-const submitContact = async (event) => {
-  event.preventDefault();
-  const firstName = event.target.firstName.value;
-  const lastName = event.target.lastName.value;
-  const email = event.target.email.value;
-  const password = event.target.password.value;
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-  const res = await fetch("/api/form", {
-    body: JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-  });
-};
-export default function Register() {
-  const [showPassword, setShowPassword] = React.useState(false);
+const theme = createTheme();
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
+export default function SignUp() {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const res = fetch("/api/form", {
+      body: JSON.stringify({
+        firstName:  firstName,
+        lastName : lastName,
+        email : email,
+        password :password
+      }),
+      headers:{
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    })
   };
-  return (
-    <>
-      <form onSubmit={submitContact} className={styles.container}>
-        <div className={styles.form}>
 
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: '#0C8CE9' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
+              
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2,  bgcolor: "#0C8CE9",
+              ":hover": {
+                bgcolor: "#fff",
+                color: "#000",
+                border: 1,
+                borderColor: "#0C8CE9",
+              }, }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/loginSign/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
         
-        <TextField
-        className={styles.TextField}
-          placeholder="Placeholder"
-          id="name"
-          name="firstName"
-          type="text"
-          autocomplete="name"
-          required
-          label="First Name"
-        />
-        <TextField
-        className={styles.TextField}
-          id="lastName"
-          name="last name"
-          type="text"
-          autocomplete="name"
-          required
-          label="Last Name"
-        />
-        <TextField
-        className={styles.TextField}
-          id="email"
-          name="E-mail"
-          type="email"
-          autocomplete="name"
-          required
-          label="exemple@hotmail.com"
-        />
-        
-        <FormControl sx={{ m: 1, width: '28ch' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          id="password"
-          name="text"
-          placeholder="Password"
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          endAdornment={
-            
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-        </FormControl>
-        <button type="submit">Submit</button>
-        </div>
-      </form>
-      
-    </>
+      </Container>
+    </ThemeProvider>
   );
 }
